@@ -9,12 +9,13 @@ ixFile = None
 netIxLanFile = None
 
 @app.route('/api/ix')
-def fazAlgo():
+def endPoint1():
 	data = {'data': json.load(open(ixFile,'r'))['data']}
+
 	return  Response(response=json.dumps(data), status=200, mimetype='application/json')
 
 @app.route('/api/ixnets/<ixId>')
-def fazAlgo2(ixId):
+def endPoint2(ixId):
 	redes = json.load(open(netIxLanFile,'r'))['data']
 	identificadores = []
 
@@ -23,10 +24,11 @@ def fazAlgo2(ixId):
 			identificadores.append(rede)
 
 	data  = {'data': identificadores}
+
 	return Response(response=json.dumps(data), status=200, mimetype='application/json')
 
 @app.route('/api/netname/<netId>')
-def fazAlgo3(netId):
+def endPoint3(netId):
 	redes = json.load(open(netFile,'r'))['data']
 	nome = None
 	
@@ -35,6 +37,7 @@ def fazAlgo3(netId):
 			nome = rede['name']
 
 	data = {'data': nome}
+
 	return Response(response=json.dumps(data), status=200, mimetype='application/json')
 
 if __name__ == '__main__':
@@ -48,4 +51,4 @@ if __name__ == '__main__':
 	netIxLanFile = sys.argv[4]
 
 	port = int(os.environ.get("PORT", PORT))
-	app.run(debug=True, host='0.0.0.0', port=port)
+	app.run( host='0.0.0.0', port=port)

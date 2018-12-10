@@ -29,7 +29,7 @@ if __name__ == '__main__':
 	opt = int(sys.argv[2])
 	dest = (ip, int(port))
 
-	redes = json.loads(request((ip, int(port)), '/api/ix'))['data']
+	redes = json.loads(request(dest, '/api/ix'))['data']
 	saida = []
 
 	if opt == 0:
@@ -53,4 +53,4 @@ if __name__ == '__main__':
 			saida.append([str(rede['id']),rede['name'],str(len(set(ids)))])
 
 	for linha in saida:
-		print('\t'.join(linha))
+		print(('\t'.join(linha)).encode('utf-8').decode('utf-8'))
